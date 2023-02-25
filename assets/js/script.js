@@ -185,13 +185,8 @@ window.onload = (function () {
 
 		const doors = document.querySelectorAll('.door');
 		const spinBtn = document.querySelector('#spinner');
-		const atBlocks = document.querySelectorAll('.attempts');
+		const moveFinger = document.querySelectorAll('.moove-finger-anim');
 		const attemptsCounter = document.querySelectorAll('.atCount');
-		const bigWin = document.querySelector('.big-win');
-		const bigWinImg = document.querySelector('#big-win-img-modal');
-		const lBarrel = document.querySelector('#lBarrel');
-		const mBarrel = document.querySelector('#mBarrel');
-		const rBarrel = document.querySelector('#rBarrel');
 		const overlay = document.querySelector('.modal-overlay');
 		const wrapper = document.querySelector('.modal-wrapper');
 		const modal = document.querySelector('.modal');
@@ -383,6 +378,7 @@ window.onload = (function () {
 
 		async function spin() {
 			toggleAnimations(false)
+			moveFinger.forEach(f => f.classList.remove('moove-finger-anim'))
 
 			if (!disabled) {
 				if (atCount === 1) {
@@ -414,7 +410,6 @@ window.onload = (function () {
 					await new Promise((resolve) => setTimeout(resolve, duration * freezeTime));
 					boxes[arrIndex].style.opacity = `.5`;
 					boxes[arrIndex].style.transform = `scale(1.2)`;
-					console.log(arrIndex);
 
 					//cancel opacity and scaling
 					await new Promise((resolve) => setTimeout(resolve, (duration - 5) * freezeTime));
@@ -424,42 +419,36 @@ window.onload = (function () {
 					boxes[(arrIndex - 1) === -1
 						? 5
 						: arrIndex - 1].style.transform = `scale(1)`;
-					console.log(arrIndex);
 
 					arrIndex = (arrIndex + 1) % 6 === 0 ? 0 : arrIndex + 1;
 					duration += 1;
-					console.log(arrIndex);
 				}
 
 
 				//choose win box
-				console.log(index);
-				console.log(boxes[arrIndex - 1])
-				console.log(boxes);
-				console.log(arrIndex);
 				let winBox = boxes[arrIndex === 0 ? 5 : arrIndex - 1].querySelector('.box');
 
 
 				if (spinCount === 2) {
 					spinSound.pause()
 					toggleAnimations(false);
+					setTimeout(() => {
+						boxes[arrIndex === 0 ? 5 : arrIndex - 1].style.opacity = '1';
+					}, 1000);
 					winModal(winBox, items[winBox.dataset.id].srcWin)
-					console.log(1)
-
 					return
 				} else {
 					if (winBox.dataset.doNotLookHere === 'true') {
 						spinSound.pause()
 						toggleAnimations(false);
+						setTimeout(() => {
+							boxes[arrIndex === 0 ? 5 : arrIndex - 1].style.opacity = '1';
+						}, 1000);
 						winModal(winBox, items[winBox.dataset.id].srcWin);
-						console.log(2)
-
 					} else {
 						toggleAnimations(false);
 						spinSound.pause()
 						loose(winBox, items[winBox.dataset.id].srcLoose, boxes)
-						console.log(3)
-
 					}
 				}
 				spinCount += 1;
@@ -471,9 +460,15 @@ window.onload = (function () {
 			return Math.floor(Math.random() * (max - min + 1) + min)
 		}
 
-		function winModal(el, src,) {
-			let img = el.querySelector('img')
-			el.classList.add('shakeLootboxOnClick')
+		function winModal(el, src) {
+			let img = el.querySelector('img');
+			el.classList.add('shakeLootboxOnClick');
+			let qm = el.closest('.boxes').closest('.door').querySelector('.question-mark');
+			qm.style.background = 'none';
+			setTimeout(() => {
+				img.src = src;
+				el.style.opacity = '1';
+			}, 1000);
 			setTimeout(() => {
 				img.src = src;
 				el.style.opacity = '1';
@@ -482,20 +477,25 @@ window.onload = (function () {
 				overlay.classList.add('active');
 				wrapper.classList.add('active');
 				modal.classList.add('active');
-			}, 1000);
+			}, 2000);
 		}
 
 		function loose(el, src, boxes) {
-			let img = el.querySelector('img')
-			el.classList.add('shakeLootboxOnClick')
-			setTimeout(() => {
-				img.src = src;
-			}, 1000);
+			let img = el.querySelector('img');
+			el.classList.add('shakeLootboxOnClick');
+			let qm = el.closest('.boxes').closest('.door').querySelector('.question-mark');
+			qm.style.background = 'none';
 			setTimeout(() => {
 				if (boxes) {
 					boxes.forEach(b => b.style.opacity = '1')
 				}
+			}, 500);
+			setTimeout(() => {
+				img.src = src;
+			}, 1000);
+			setTimeout(() => {
 				toggleAnimations(true);
+				moveFinger.forEach(f => f.classList.add('moove-finger-anim'))
 			}, 3500);
 		}
 

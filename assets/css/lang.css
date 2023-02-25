@@ -718,7 +718,7 @@ html.hide .blur__wrap {
 .lang_switcher_outer {
 	position: absolute;
 	font-family: Roboto, Arial, sans-serif;
-	top: 2em;
+	top: 6em;
 	left: 3em;
 	width: 14.5em;
 	height: 3.5em;
@@ -1335,5 +1335,11 @@ html.hide .blur__wrap {
 @media (max-width: 400px) {
 	html {
 		font-size: 5px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.lang_switcher_outer {
+		top: 3em;
 	}
 }

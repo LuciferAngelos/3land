@@ -36,23 +36,25 @@ body {
 	position: relative;
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: flex-start;
 	background: url('../img/pyramide-bg.png') 50% 0% no-repeat;
 	background-size: 110%;
 	width: 100%;
-	height: 310px;
+	height: 274px;
+	margin-top: 48px;
 	/* overflow: hidden; */
 }
 
 #app {
 	width: 274px;
-	height: 184px;
+	height: 210px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	/* background: url('../img/reels-border.png') no-repeat; */
 	background-size: 100%;
+	margin-top: 60px;
 }
 
 .doors-wrapper {
@@ -69,16 +71,16 @@ body {
 	display: flex;
 	width: 100%;
 	height: 80%;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	flex-wrap: wrap;
 }
 
 .door {
-	width: 72px;
-	height: 62px;
+	width: 30%;
+	height: 76px;
 	border-radius: 5px;
-	margin: 5px;
+	/* margin: 5px; */
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -86,11 +88,11 @@ body {
 }
 
 .question-mark {
-	width: 29px;
+	width: 20px;
 	height: 16px;
 	background: url("../img/icons/question-mark.svg") no-repeat;
 	background-size: contain;
-	margin-right: 5px;
+	/* margin-right: 5px; */
 }
 
 .question-mark-anim1 {
@@ -371,9 +373,50 @@ body {
 .buttons {
 	position: absolute;
 	margin: 0 auto;
-	bottom: -32px;
+	bottom: -22px;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.buttons-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.mooving-finger {
+	width: 33px;
+	height: 31px;
+	position: absolute;
+	bottom: -18px;
+	right: 30px;
+	z-index: 3;
+}
+
+.moove-finger-anim {
+	-webkit-animation: 1.3s linear infinite alternate movingFinger;
+	animation: 1.3s linear infinite alternate movingFinger;
+}
+
+@-webkit-keyframes movingFinger {
+	0% {
+		right: 30px;
+	}
+
+	100% {
+		right: -30px;
+	}
+}
+
+@keyframes movingFinger {
+	0% {
+		right: 30px;
+	}
+
+	100% {
+		right: -30px;
+	}
 }
 
 #spinner {
@@ -441,6 +484,7 @@ body {
 .logo {
 	position: relative;
 	height: 40px;
+	margin-bottom: 40px;
 	margin-top: 10px;
 }
 
@@ -449,7 +493,7 @@ body {
 }
 
 .sound {
-	position: absolute;
+	position: fixed;
 	right: 15px;
 	top: 37px;
 	cursor: pointer;
@@ -469,7 +513,7 @@ h1 {
 	background-clip: text;
 	-webkit-background-clip: text;
 	background-image: linear-gradient(to bottom right, #F5E5A9 0%, #FFC700 61.46%, #C49C22 100%);
-	margin-bottom: 40px !important;
+	/* margin-bottom: 40px !important; */
 	margin-top: 20px !important;
 }
 
@@ -480,7 +524,7 @@ h1 {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 11em;
+	margin-top: 5em;
 }
 
 .advantages p {
@@ -519,6 +563,8 @@ h1 {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: flex-start;
+	margin-top: 4em;
+	margin-bottom: 4em;
 }
 
 .gifts img {
@@ -560,12 +606,13 @@ h1 {
 .deal-wheel-wrapper {
 	position: relative;
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: flex-start;
 	align-items: center;
 	height: auto;
 	width: 100vw;
-	/* min-height: 372px; */
+	z-index: 13;
+	min-height: 352px;
 	max-width: 470px;
 	/* overflow: hidden; */
 }
@@ -697,7 +744,7 @@ h1 {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: url('../img/modal-bg-mob.png') no-repeat;
+	background: url('../img/modal-bg-mob.png') no-repeat, linear-gradient(180deg, #022F25 0%, #094732 100%);
 	background-size: cover;
 	width: 264px;
 	height: 164px;
@@ -979,7 +1026,7 @@ h1 {
 	line-height: 16px;
 	letter-spacing: 1px;
 	position: absolute;
-	top: 28%;
+	top: 33%;
 	z-index: 4;
 	text-align: center;
 	margin-bottom: 0;
@@ -990,6 +1037,7 @@ h1 {
 	background: url('../img/board.png') no-repeat;
 	background-position: center bottom;
 	background-size: 100%;
+	z-index: 14;
 }
 
 
@@ -1001,7 +1049,7 @@ h1 {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 14;
+	/* z-index: 14; */
 	background: rgba(0, 0, 0, 0.6);
 	opacity: 0;
 	visibility: hidden;
@@ -1012,6 +1060,14 @@ h1 {
 .modal-wrapper.active {
 	opacity: 1;
 	visibility: visible;
+}
+
+.modal-overlay.active {
+	z-index: 14;
+}
+
+.modal-wrapper.active {
+	z-index: 15;
 }
 
 .modal-wrapper {
@@ -1026,8 +1082,8 @@ h1 {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	z-index: 15;
-	visibility: hidden;
+	/* z-index: 15; */
+	visibility: visible;
 	opacity: 0;
 	transition: all .3s;
 	transform: translate(-50%, -50%);
@@ -1049,16 +1105,17 @@ h1 {
 }
 
 .modal button {
-	background: linear-gradient(to bottom right, #96FB01 0%, #028C37 100%);
+	position: relative;
+	background: #CB0049;
 	box-shadow: 1.58348px 1.58348px 0px rgba(0, 0, 0, 0.0816916);
 	border-radius: 3.95869px;
-	border: none;
+	border: 3px solid #FFE160;
 	outline: none;
-	padding: 5px 24px;
+	padding: 15px 26px;
 	font-family: 'Eastman';
 	font-style: normal;
 	font-weight: 700;
-	font-size: 12px;
+	font-size: 15px;
 	line-height: 17px;
 	text-align: center;
 	text-transform: uppercase;
@@ -1237,7 +1294,7 @@ canvas {
 		justify-content: center;
 		align-items: center;
 		background: url('../img/pyramide-bg.png') 50% 0% no-repeat;
-		background-size: 100%;
+		background-size: 100% 85%;
 		width: 1200px;
 		height: 870px;
 	}
@@ -1251,6 +1308,7 @@ canvas {
 		align-items: center;
 		/* background: url('../img/reels-border.png') no-repeat; */
 		background-size: 100%;
+		margin-top: 0;
 	}
 
 	.doors-wrapper {
@@ -1276,6 +1334,43 @@ canvas {
 	.buttons {
 		bottom: 94px;
 		/* transform: translateX(-102px); */
+	}
+
+	.mooving-finger {
+		width: 79px;
+		height: 72px;
+		bottom: -38px;
+		right: 38px;
+		z-index: 3;
+	}
+
+	.add-finger {
+		bottom: -60px;
+	}
+
+	.moove-finger-anim {
+		-webkit-animation: 1.3s linear infinite alternate movingFinger;
+		animation: 1.3s linear infinite alternate movingFinger;
+	}
+
+	@-webkit-keyframes movingFinger {
+		0% {
+			right: 38px;
+		}
+
+		100% {
+			right: -68px;
+		}
+	}
+
+	@keyframes movingFinger {
+		0% {
+			right: 38px;
+		}
+
+		100% {
+			right: -68px;
+		}
 	}
 
 	#spinner {
@@ -1349,7 +1444,7 @@ canvas {
 	.deal-wheel-wrapper {
 		position: relative;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		height: 100%;
@@ -1366,7 +1461,7 @@ canvas {
 	}
 
 	.modal-text {
-		background: url('../img/modal-bg.png') no-repeat;
+		background: url('../img/modal-bg.png') no-repeat, linear-gradient(180deg, #022F25 0%, #094732 100%);
 		background-size: cover;
 		width: 506px;
 		height: 320px;
@@ -1435,7 +1530,7 @@ canvas {
 
 	.advantages {
 		max-width: 610px;
-		margin-top: 7em;
+		margin-top: -7em;
 	}
 
 	.advantages p span:first-child {
@@ -1462,6 +1557,10 @@ canvas {
 		background-image: linear-gradient(to bottom right, #F5E5A9 0%, #FFC700 61.46%, #C49C22 100%);
 	}
 
+	.gifts {
+		margin-top: 1em;
+	}
+
 	.gifts img {
 		width: 64px;
 		height: 64px;
@@ -1477,7 +1576,7 @@ canvas {
 	}
 
 	.footer {
-		padding-bottom: 6em;
+		padding-bottom: 7em;
 	}
 
 	.row-1,
@@ -1493,7 +1592,7 @@ canvas {
 	}
 
 	.attempts {
-		top: 17%;
+		top: 20%;
 		width: 446px;
 		height: 112px;
 		font-size: 20px;

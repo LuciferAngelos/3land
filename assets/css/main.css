@@ -20,7 +20,7 @@ body {
 	place-items: center;
 	/* если что-то не помещается на своё место — скрываем то, что не поместилось */
 	/* overflow: hidden; */
-	background: url('../img/bg.png') no-repeat, linear-gradient(180deg, #0E0928 0%, #0D050A 100%);
+	background: url('../img/bg.png') no-repeat, linear-gradient(180deg, #000000 0%, #000000 100%);
 	background-position: center center;
 	background-size: 100% 360px;
 	width: 100%;
